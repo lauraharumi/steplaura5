@@ -43,8 +43,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(localtime + html)
-        start, end = self.request.get("from"), self.request.get("to")
-        out_checked = self.request.get("check")
+        start, end, out_checked = self.request.get("from"), self.request.get("to"), self.request.get("check")
         self.response.write("<h4> From: " + start + " To: "+ end + out_checked + "</h4><br>")
         if out_checked: 
             route = find_route(outrages(create_graph(output), out_data), start, end)
