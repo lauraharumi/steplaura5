@@ -6,12 +6,9 @@ import time
 import json
 
 localtime = time.asctime( time.localtime(time.time()) )
-file = open("main.html","r")
-html = file.read()
-url = open("data.json","r")
-output = json.load(url)
-outrages = open("outrages.json","r")
-out_data = json.load(outrages)
+html = open("main.html","r").read()
+output = json.load(open("data.json","r"))
+out_data = json.load(open("outrages.json","r"))
 
 def create_graph(output): 
     graph = {}
