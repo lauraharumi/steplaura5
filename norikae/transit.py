@@ -8,7 +8,7 @@ import json
 localtime = time.asctime( time.localtime(time.time()) )
 html = open("main.html","r").read()
 output = json.load(open("data.json","r"))
-out_data = json.load(open("outrages.json","r"))
+out_data = json.load(open("outtages.json","r"))
 
 def create_graph(output): 
     graph = {}
@@ -22,7 +22,7 @@ def create_graph(output):
                     graph[eki].append(eki_list[j])
     return graph
     
-def outrages(graph, out_data):
+def outtages(graph, out_data):
     for from_to in out_data:
         graph[from_to['From']].remove(from_to['To'])
     return graph
@@ -46,7 +46,7 @@ class MainPage(webapp2.RequestHandler):
         start, end, out_checked = self.request.get("from"), self.request.get("to"), self.request.get("check")
         self.response.write("<h4> From: " + start + " To: "+ end + out_checked + "</h4><br>")
         if out_checked: 
-            route = find_route(outrages(create_graph(output), out_data), start, end)
+            route = find_route(outtages(create_graph(output), out_data), start, end)
         else: 
             route = find_route(create_graph(output), start, end)
         for station in route: 
